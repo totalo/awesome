@@ -1,7 +1,8 @@
-#[dervie(Debug)]
+//#[dervie(Debug)]
 // 枚举
 pub fn main() {
     enum_1();
+    enum_2();
 }
 
 //enum Book {
@@ -43,5 +44,23 @@ fn enum_1() {
     match ebook {
         Book::Papery => println!("this is a papery book"),
         Book::Electronic => println!("this is a electronic book"),
+    }
+}
+
+fn enum_2() {
+    // Option 是 Rust 标准库中的枚举类，这个类用于填补 Rust 不支持 null 引用的空白。
+    // Rust 在语言层面彻底不允许空值 null 的存在，但无奈null 可以高效地解决少量的问题，所以 Rust 引入了 Option 枚举类：
+    // enum Option<T> {
+    //     Some(T),
+    //     None,
+    // }
+    let opt = Option::Some("Hello");
+    match opt {
+        Option::Some(something) => {
+            println!("{}", something);
+        },
+        Option::None => {
+            println!("opt is nothing");
+        }
     }
 }
