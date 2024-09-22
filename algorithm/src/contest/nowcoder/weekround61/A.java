@@ -1,12 +1,17 @@
+package contest.nowcoder.weekround61;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
-public class C {
+/**
+ * java 提交模板
+ * atcoder、nowcoder 需要修改类名为 Main,并且去掉 package 语句
+ * codeforces 只需要去掉包名
+ */
+public class A {
     
     static BufferedReader reader;
     static BufferedWriter writer;
@@ -15,37 +20,20 @@ public class C {
         reader = new BufferedReader(new InputStreamReader(System.in));
         writer = new BufferedWriter(new OutputStreamWriter(System.out));
         
-        int t = sc.nextInt();
+        String[] s = sc.next().split("-");
         
-        for (int i = 0; i < t; i++) {
-            solve();
-        }
+        StringBuilder ans = new StringBuilder();
+        
+        ans.append(Integer.parseInt(s[0]) + 10);
+        ans.append("-");
+        ans.append(s[1]);
+        ans.append("-");
+        ans.append(s[2]);
+        
+        writer.write(ans + "\n");
         
         reader.close();
         writer.close();
-    }
-    
-    static void solve() throws IOException {
-        int n = sc.nextInt();
-        int[] nums = new int[n];
-        long sum = 0;
-        for (int i = 0; i < n; i++) {
-            nums[i] = sc.nextInt();
-            sum += nums[i];
-        }
-        Arrays.sort(nums);
-        int idx = n / 2;
-        if (n <= 2) {
-            writer.write("-1\n");
-            return;
-        }
-//        if (nums[idx] <= ((sum - 1 ) / (2L * n))) {
-//            writer.write("0\n");
-//            return;
-//        }
-        
-        long ans = Math.max(0, nums[idx] * 2L * n + 1 - sum);
-        writer.write(ans + "\n");
     }
     
     static Kattio sc = new Kattio();
@@ -82,3 +70,4 @@ public class C {
         }
     }
 }
+
