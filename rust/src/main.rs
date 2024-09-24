@@ -25,3 +25,25 @@ fn shadowing() {
     let x = x * 2;
     println!("The value of x is: {}", x); // 12
 }
+
+pub fn self_dividing_numbers(left: i32, right: i32) -> Vec<i32> {
+    let mut ans = vec![];
+    for i in left..right+1 {
+        if is_self_dividing(i) {
+            ans.push(i);
+        }
+    }
+    ans
+}
+
+pub fn is_self_dividing(n: i32) -> bool {
+    let mut num = n;
+    while num > 0 {
+        let digit = num % 10;
+        if digit == 0 || n % digit != 0 {
+            return false;
+        }
+        num /= 10;
+    }
+    true
+}
