@@ -1,69 +1,52 @@
-package contest.codeforces.daily;
+package contest.nowcoder.practice._129;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.util.Arrays;
 import java.util.StringTokenizer;
 
 /**
- * 灵神的cf 每日一题
- * 2024-09-24 https://codeforces.com/problemset/problem/812/C
+ * java 提交模板
+ * atcoder、nowcoder 需要修改类名为 Main,并且去掉 package 语句
+ * codeforces 只需要去掉包名
  */
-public class _240924 {
+public class A {
     
     static BufferedReader reader;
     static BufferedWriter writer;
     
-    static long v;
     public static void main(String[] args) throws Exception {
         reader = new BufferedReader(new InputStreamReader(System.in));
         writer = new BufferedWriter(new OutputStreamWriter(System.out));
         
-        solve();
-        reader.close();
-        writer.close();
-    }
-    
-    private static void solve() throws Exception {
         int n = sc.nextInt();
-        int s = sc.nextInt();
-        int[] nums = new int[n];
-        for (int i = 0; i < n; i++) {
-            nums[i] = sc.nextInt();
-        }
         
-        int l = 0, r = n;
-        while (l <= r) {
-            int mid = ((r - l) >> 1) + l;
-            if (check(nums, n, mid, s)) {
-                l = mid + 1;
-            } else {
-                r = mid - 1;
+        boolean[] isPrime = new boolean[n + 1];
+        int[] cnt = new int[n + 1];
+        
+        for (int i = 2; i <= n; i++) {
+            if (!isPrime[i]) {
+                for (int j = i; j <= n; j += i) {
+                    cnt[j]++;
+                    isPrime[j] = true;
+                }
             }
         }
         
-        writer.write(l - 1 + " " + v + "\n");
+        int ans = 0;
+        for (int i = 2; i <= n; i++) {
+            if (cnt[i] > 1) {
+                ans++;
+            }
+        }
         
-    }
-    
-    static boolean check(int[] nums, int n, int k, int s) {
-        long[] a = new long[n];
-        for (int i = 0; i < n; i++) {
-            a[i] = nums[i] + (long) (i + 1) * k;
-        }
-        Arrays.sort(a);
-        long ans = 0;
-        for (int i = 0; i < k; i++) {
-            ans += a[i];
-        }
-        if (ans <= s) {
-            v = ans;
-            return true;
-        } else {
-            return false;
-        }
+        
+        
+        writer.write(ans + "\n");
+        
+        reader.close();
+        writer.close();
     }
     
     static Kattio sc = new Kattio();
