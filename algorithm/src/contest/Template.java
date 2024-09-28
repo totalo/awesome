@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.util.StringTokenizer;
 
 /**
@@ -13,30 +14,16 @@ import java.util.StringTokenizer;
  */
 public class Template {
     
-    static BufferedReader reader;
-    static BufferedWriter writer;
-    
     public static void main(String[] args) throws Exception {
-        reader = new BufferedReader(new InputStreamReader(System.in));
-        writer = new BufferedWriter(new OutputStreamWriter(System.out));
         
-        String s = sc.next();
-        
-        StringBuilder ans = new StringBuilder();
-        for (int i = 0; i < s.length(); i++) {
-            char c = s.charAt(i);
-            if (c == '.') {
-                continue;
-            }
-            ans.append(c);
+        int t = sc.nextInt();
+        while (t-- > 0) {
+            out.println("Hello coder");
         }
-        writer.write(ans + "\n");
-        
-        reader.close();
-        writer.close();
     }
     
     static Kattio sc = new Kattio();
+    static PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
     
     static class Kattio {
         static BufferedReader r;
