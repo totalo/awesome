@@ -1,13 +1,7 @@
 package contest.codeforces.round975_div2;
 
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.util.Map;
-import java.util.StringTokenizer;
-import java.util.TreeMap;
+import java.util.*;
+import java.io.*;
 
 /**
  * java 提交模板
@@ -16,75 +10,37 @@ import java.util.TreeMap;
  */
 public class B {
     
-    static BufferedReader reader;
-    static BufferedWriter writer;
-    
     public static void main(String[] args) throws Exception {
-        reader = new BufferedReader(new InputStreamReader(System.in));
-        writer = new BufferedWriter(new OutputStreamWriter(System.out));
         
         int t = sc.nextInt();
-        
-        for (int i = 0; i < t; i++) {
-            solve();
-        }
-        
-        reader.close();
-        writer.close();
-    }
-    
-    private static void solve() throws Exception {
-        int n = sc.nextInt();
-        int q = sc.nextInt();
-        int[] x = new int[n];
-        for (int i = 0; i < n; i++) {
-            x[i] = sc.nextInt();
-        }
-        
-        long[] k = new long[q];
-        for (int i = 0; i < q; i++) {
-            k[i] = sc.nextLong();
-        }
-        
-        TreeMap<Long, Long> map = new TreeMap<>();
-        
-        // 这里会优化
-        
-        // 遍历所有 (i, j) 对，更新差分数组
-        for (int i = 0; i < n; i++) {
-            for (int j = i + 1; j < n; j++) {
-                long l = x[i];
-                long r = x[j];
-                map.merge(l, 1L, Long::sum);
-                map.merge(r + 1, -1L, Long::sum);
+        while (t-- > 0) {
+            int n = sc.nextInt(), q = sc.nextInt();
+            int[] a = new int[n];
+            for (int i = 0; i < n; i++) {
+                a[i] = sc.nextInt();
             }
-        }
-        
-        TreeMap<Long, Long> coverMap = new TreeMap<>();
-        long cnt = 0;
-        long prePos = 0;
-        
-        for (Map.Entry<Long, Long> entry : map.entrySet()) {
-            long pos = entry.getKey();
-            long len = entry.getValue();
-            if (cnt > 0 && prePos > 0) {
-                coverMap.merge(cnt, pos - prePos, Long::sum);
+            Map<Long, Integer> map = new HashMap<>();
+            for (int i = 0; i < n; i++) {
+                long key = (long) (i + 1) * (n - i) - 1;
+                map.merge(key, 1, Integer::sum);
             }
-            
-            cnt += len;
-            prePos = pos;
+            for (int i = 1; i < n; i++) {
+                int d = a[i] - a[i - 1] - 1;
+                map.merge((long) i * (n - i), d, Integer::sum);
+            }
+            for (int i = 0; i < q; i++) {
+                long k = sc.nextLong();
+                out.print(map.getOrDefault(k, 0) +" ");
+            }
+            out.println();
         }
         
-        for (int i = 0; i < q; i++) {
-            writer.write(coverMap.getOrDefault(k[i], 0L) + "");
-            if (i < q - 1) {
-                writer.write(" ");
-            }
-        }
-        writer.write("\n");
+        out.close();
+        sc.close();
     }
     
     static Kattio sc = new Kattio();
+    static PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(System.out)));
     
     static class Kattio {
         static BufferedReader r;
@@ -115,6 +71,10 @@ public class B {
         
         public double nextDouble() {
             return Double.parseDouble(next());
+        }
+        
+        public void close() throws Exception {
+            r.close();
         }
     }
 }
