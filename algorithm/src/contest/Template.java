@@ -20,6 +20,8 @@ public class Template {
         while (t-- > 0) {
             out.println("Hello coder");
         }
+        
+        out.close();
     }
     
     static Kattio sc = new Kattio();
